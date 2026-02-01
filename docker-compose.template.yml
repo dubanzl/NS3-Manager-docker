@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  gns3-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        QEMU_VERSION: ${QEMU_VERSION}
+        GNS3_SERVER_VERSION: ${GNS3_SERVER_VERSION}
+    image: gns3-qemu:${QEMU_VERSION}-server-${GNS3_SERVER_VERSION}
+    container_name: gns3-server
+    ports:
+      - "3080:3080"
+    volumes:
+      - gns3-data:/opt/gns3
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    restart: unless-stopped
+    networks:
+      - gns3-network
+
+  gns3-client:
+    image: gns3/gns3-gui:latest
+    container_name: gns3-client
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - gns3-data:/opt/gns3
+    network_mode: "host"
+    depends_on:
+      - gns3-server
+    restart: unless-stopped
+
+volumes:
+  gns3-data:
+
+networks:
+  gns3-network:
+    driver: bridge
