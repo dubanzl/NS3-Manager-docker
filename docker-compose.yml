@@ -1,0 +1,18 @@
+services:
+  gns3-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # IMPORTANT: change the name of the image to the version of the qemu and gns3 server
+    image: gns3-qemu:4.2.1-server-2.2.40
+    container_name: gns-server
+    # IMPORTANT: Use host networking and use nat connection to the host machine
+    network_mode: host
+    volumes:
+      - gns3-data:/opt/gns3
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    restart: unless-stopped
+
+volumes:
+  gns3-data:
