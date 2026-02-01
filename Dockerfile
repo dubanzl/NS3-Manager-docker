@@ -37,7 +37,12 @@ RUN apt-get update && apt-get install -y \
     meson \
     cmake \
     libpcap-dev \
- && rm -rf /var/lib/apt/lists/*
+    libvirt-daemon-system \
+    libvirt-clients \
+    libvirt-dev \
+    bridge-utils \
+    dnsmasq \
+&& rm -rf /var/lib/apt/lists/*
 
 # -----------------------
 # Build and install uBridge (for GNS3)
