@@ -6,15 +6,15 @@ Docker container for GNS3 server with custom QEMU build.
 
 To update versions, manually edit the configuration files:
 
-### Update QEMU Version
+### Update Versions
 
-Edit `docker-compose.yml`:
+Edit `docker-compose.yml` and update both the build args and image name:
 
 ```yaml
-args:
-  QEMU_VERSION: 4.2.1
-  GNS3_SERVER_VERSION: 2.2.40
+image: gns3-qemu:4.2.1-server-2.2.40
 ```
+
+**Important**: When updating versions, make sure to update the `image` name to match the new version numbers.
 
 Or modify the default values in `Dockerfile`:
 
