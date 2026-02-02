@@ -9,7 +9,7 @@ services:
     # IMPORTANT: Use host networking and use nat connection to the host machine
     network_mode: host
     volumes:
-      - gns3-data:/opt/gns3
+      - gns3-data:/root/GNS3
       - /var/run/docker.sock:/var/run/docker.sock
     privileged: true
     restart: unless-stopped
