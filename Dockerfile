@@ -74,7 +74,8 @@ RUN wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz \
  && rm -rf qemu-${QEMU_VERSION} qemu-${QEMU_VERSION}.tar.xz
 
 # Install GNS3 server
-RUN pip3 install --no-cache-dir gns3-server==${GNS3_SERVER_VERSION}
+RUN pip3 install --no-cache-dir gns3-server==${GNS3_SERVER_VERSION}  \
+    && pip3 install --no-cache-dir docker==7.0.0
 
 EXPOSE 3080
 CMD ["gns3server", "--host", "0.0.0.0", "--port", "3080"]
